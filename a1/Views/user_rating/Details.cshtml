@@ -1,0 +1,42 @@
+﻿@model a1.Models.user_rating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>user_rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_rating1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_rating1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_tag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_tag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_t.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_t.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User_rating_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<a1.Models.video>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vid_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vid_body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_t.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vid_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vid_body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_t.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Vid_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Vid_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Vid_id })
+        </td>
+    </tr>
+}
+
+</table>

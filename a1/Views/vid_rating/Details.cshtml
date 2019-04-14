@@ -1,0 +1,42 @@
+﻿@model a1.Models.vid_rating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vid_rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.U_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.U_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vid_rating1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vid_rating1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.video.Vid_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.video.Vid_title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Vid_rating_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

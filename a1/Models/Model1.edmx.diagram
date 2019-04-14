@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4ab4c118a8649ba95fad5c845b56153" Name="Diagram1">
+        <EntityTypeShape EntityType="paathshalaModel.message" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.qa" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.qa_comment" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.qa_rating" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.user_rating" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.user_t" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.vid_comment" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.vid_rating" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="paathshalaModel.video" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <AssociationConnector Association="paathshalaModel.FK__message__S_id__0519C6AF" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__qa__U_id__0EA330E9" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__qa_commen__Qa_id__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__qa_rating__Qa_id__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__qa_comment__U_id__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__user_ratin__U_id__09DE7BCC" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__vid_commen__U_id__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__video__U_id__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__vid_comme__Vid_i__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="paathshalaModel.FK__vid_ratin__Vid_i__1CF15040" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

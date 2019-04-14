@@ -1,0 +1,42 @@
+﻿@model a1.Models.qa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>qa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Qa_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qa_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qa_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qa_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_t.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_t.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Qa_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

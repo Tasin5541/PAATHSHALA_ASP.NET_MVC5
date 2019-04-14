@@ -1,0 +1,48 @@
+﻿@model a1.Models.vid_rating
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>vid_rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.U_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.U_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vid_rating1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vid_rating1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.video.Vid_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.video.Vid_title)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

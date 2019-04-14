@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="paathshalaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="M_id" />
+          </Key>
+          <Property Name="M_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="S_id" Type="int" Nullable="false" />
+          <Property Name="Destination_id" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="qa">
+          <Key>
+            <PropertyRef Name="Qa_id" />
+          </Key>
+          <Property Name="Qa_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Qa_title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Qa_body" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="qa_comment">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Qa_id" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="qa_rating">
+          <Key>
+            <PropertyRef Name="Qa_rating_id" />
+          </Key>
+          <Property Name="Qa_rating_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Qa_id" Type="int" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Qa_rating" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="user_rating">
+          <Key>
+            <PropertyRef Name="User_rating_id" />
+          </Key>
+          <Property Name="User_rating_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="User_rating" Type="int" />
+          <Property Name="User_tag" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="user_t">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_check" Type="int" Nullable="false" />
+          <Property Name="ban" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vid_comment">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Vid_id" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="vid_rating">
+          <Key>
+            <PropertyRef Name="Vid_rating_id" />
+          </Key>
+          <Property Name="Vid_rating_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vid_id" Type="int" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Vid_rating" Type="int" />
+        </EntityType>
+        <EntityType Name="video">
+          <Key>
+            <PropertyRef Name="Vid_id" />
+          </Key>
+          <Property Name="Vid_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Vid_title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Vid_body" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__message__S_id__0519C6AF">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="S_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa__U_id__0EA330E9">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="qa" Type="Self.qa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="qa">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_commen__Qa_id__22AA2996">
+          <End Role="qa" Type="Self.qa" Multiplicity="1" />
+          <End Role="qa_comment" Type="Self.qa_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qa">
+              <PropertyRef Name="Qa_id" />
+            </Principal>
+            <Dependent Role="qa_comment">
+              <PropertyRef Name="Qa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_comment__U_id__21B6055D">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="qa_comment" Type="Self.qa_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="qa_comment">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_rating__Qa_id__182C9B23">
+          <End Role="qa" Type="Self.qa" Multiplicity="1" />
+          <End Role="qa_rating" Type="Self.qa_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qa">
+              <PropertyRef Name="Qa_id" />
+            </Principal>
+            <Dependent Role="qa_rating">
+              <PropertyRef Name="Qa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_ratin__U_id__09DE7BCC">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="user_rating" Type="Self.user_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="user_rating">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_comme__Vid_i__286302EC">
+          <End Role="video" Type="Self.video" Multiplicity="1" />
+          <End Role="vid_comment" Type="Self.vid_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="video">
+              <PropertyRef Name="Vid_id" />
+            </Principal>
+            <Dependent Role="vid_comment">
+              <PropertyRef Name="Vid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_commen__U_id__276EDEB3">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="vid_comment" Type="Self.vid_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="vid_comment">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_ratin__Vid_i__1CF15040">
+          <End Role="video" Type="Self.video" Multiplicity="1" />
+          <End Role="vid_rating" Type="Self.vid_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="video">
+              <PropertyRef Name="Vid_id" />
+            </Principal>
+            <Dependent Role="vid_rating">
+              <PropertyRef Name="Vid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__video__U_id__1367E606">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="video" Type="Self.video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="video">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="paathshalaModelStoreContainer">
+          <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qa" EntityType="Self.qa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qa_comment" EntityType="Self.qa_comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qa_rating" EntityType="Self.qa_rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_rating" EntityType="Self.user_rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_t" EntityType="Self.user_t" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vid_comment" EntityType="Self.vid_comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vid_rating" EntityType="Self.vid_rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="video" EntityType="Self.video" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__message__S_id__0519C6AF" Association="Self.FK__message__S_id__0519C6AF">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa__U_id__0EA330E9" Association="Self.FK__qa__U_id__0EA330E9">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="qa" EntitySet="qa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_commen__Qa_id__22AA2996" Association="Self.FK__qa_commen__Qa_id__22AA2996">
+            <End Role="qa" EntitySet="qa" />
+            <End Role="qa_comment" EntitySet="qa_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_comment__U_id__21B6055D" Association="Self.FK__qa_comment__U_id__21B6055D">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="qa_comment" EntitySet="qa_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_rating__Qa_id__182C9B23" Association="Self.FK__qa_rating__Qa_id__182C9B23">
+            <End Role="qa" EntitySet="qa" />
+            <End Role="qa_rating" EntitySet="qa_rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_ratin__U_id__09DE7BCC" Association="Self.FK__user_ratin__U_id__09DE7BCC">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="user_rating" EntitySet="user_rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_comme__Vid_i__286302EC" Association="Self.FK__vid_comme__Vid_i__286302EC">
+            <End Role="video" EntitySet="video" />
+            <End Role="vid_comment" EntitySet="vid_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_commen__U_id__276EDEB3" Association="Self.FK__vid_commen__U_id__276EDEB3">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="vid_comment" EntitySet="vid_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_ratin__Vid_i__1CF15040" Association="Self.FK__vid_ratin__Vid_i__1CF15040">
+            <End Role="video" EntitySet="video" />
+            <End Role="vid_rating" EntitySet="vid_rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__video__U_id__1367E606" Association="Self.FK__video__U_id__1367E606">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="video" EntitySet="video" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="paathshalaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="M_id" />
+          </Key>
+          <Property Name="M_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="S_id" Type="Int32" Nullable="false" />
+          <Property Name="Destination_id" Type="Int32" Nullable="false" />
+          <Property Name="message1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__message__S_id__0519C6AF" FromRole="message" ToRole="user_t" />
+        </EntityType>
+        <EntityType Name="qa">
+          <Key>
+            <PropertyRef Name="Qa_id" />
+          </Key>
+          <Property Name="Qa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Qa_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Qa_body" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__qa__U_id__0EA330E9" FromRole="qa" ToRole="user_t" />
+          <NavigationProperty Name="qa_comment" Relationship="Self.FK__qa_commen__Qa_id__22AA2996" FromRole="qa" ToRole="qa_comment" />
+          <NavigationProperty Name="qa_rating" Relationship="Self.FK__qa_rating__Qa_id__182C9B23" FromRole="qa" ToRole="qa_rating" />
+        </EntityType>
+        <EntityType Name="qa_comment">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Qa_id" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="qa" Relationship="Self.FK__qa_commen__Qa_id__22AA2996" FromRole="qa_comment" ToRole="qa" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__qa_comment__U_id__21B6055D" FromRole="qa_comment" ToRole="user_t" />
+        </EntityType>
+        <EntityType Name="qa_rating">
+          <Key>
+            <PropertyRef Name="Qa_rating_id" />
+          </Key>
+          <Property Name="Qa_rating_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Qa_id" Type="Int32" Nullable="false" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Qa_rating1" Type="Int32" />
+          <NavigationProperty Name="qa" Relationship="Self.FK__qa_rating__Qa_id__182C9B23" FromRole="qa_rating" ToRole="qa" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user_rating">
+          <Key>
+            <PropertyRef Name="User_rating_id" />
+          </Key>
+          <Property Name="User_rating_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="User_rating1" Type="Int32" />
+          <Property Name="User_tag" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__user_ratin__U_id__09DE7BCC" FromRole="user_rating" ToRole="user_t" />
+        </EntityType>
+        <EntityType Name="user_t">
+          <Key>
+            <PropertyRef Name="U_id" />
+          </Key>
+          <Property Name="U_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Admin_check" Type="Int32" Nullable="false" />
+          <Property Name="ban" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="messages" Relationship="Self.FK__message__S_id__0519C6AF" FromRole="user_t" ToRole="message" />
+          <NavigationProperty Name="qas" Relationship="Self.FK__qa__U_id__0EA330E9" FromRole="user_t" ToRole="qa" />
+          <NavigationProperty Name="qa_comment" Relationship="Self.FK__qa_comment__U_id__21B6055D" FromRole="user_t" ToRole="qa_comment" />
+          <NavigationProperty Name="user_rating" Relationship="Self.FK__user_ratin__U_id__09DE7BCC" FromRole="user_t" ToRole="user_rating" />
+          <NavigationProperty Name="vid_comment" Relationship="Self.FK__vid_commen__U_id__276EDEB3" FromRole="user_t" ToRole="vid_comment" />
+          <NavigationProperty Name="videos" Relationship="Self.FK__video__U_id__1367E606" FromRole="user_t" ToRole="video" />
+        </EntityType>
+        <EntityType Name="vid_comment">
+          <Key>
+            <PropertyRef Name="C_id" />
+          </Key>
+          <Property Name="C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Vid_id" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__vid_commen__U_id__276EDEB3" FromRole="vid_comment" ToRole="user_t" />
+          <NavigationProperty Name="video" Relationship="Self.FK__vid_comme__Vid_i__286302EC" FromRole="vid_comment" ToRole="video" />
+        </EntityType>
+        <EntityType Name="vid_rating">
+          <Key>
+            <PropertyRef Name="Vid_rating_id" />
+          </Key>
+          <Property Name="Vid_rating_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vid_id" Type="Int32" Nullable="false" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Vid_rating1" Type="Int32" />
+          <NavigationProperty Name="video" Relationship="Self.FK__vid_ratin__Vid_i__1CF15040" FromRole="vid_rating" ToRole="video" />
+        </EntityType>
+        <EntityType Name="video">
+          <Key>
+            <PropertyRef Name="Vid_id" />
+          </Key>
+          <Property Name="Vid_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Vid_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vid_body" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user_t" Relationship="Self.FK__video__U_id__1367E606" FromRole="video" ToRole="user_t" />
+          <NavigationProperty Name="vid_comment" Relationship="Self.FK__vid_comme__Vid_i__286302EC" FromRole="video" ToRole="vid_comment" />
+          <NavigationProperty Name="vid_rating" Relationship="Self.FK__vid_ratin__Vid_i__1CF15040" FromRole="video" ToRole="vid_rating" />
+        </EntityType>
+        <Association Name="FK__message__S_id__0519C6AF">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="S_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa__U_id__0EA330E9">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="qa" Type="Self.qa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="qa">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_commen__Qa_id__22AA2996">
+          <End Role="qa" Type="Self.qa" Multiplicity="1" />
+          <End Role="qa_comment" Type="Self.qa_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qa">
+              <PropertyRef Name="Qa_id" />
+            </Principal>
+            <Dependent Role="qa_comment">
+              <PropertyRef Name="Qa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_rating__Qa_id__182C9B23">
+          <End Role="qa" Type="Self.qa" Multiplicity="1" />
+          <End Role="qa_rating" Type="Self.qa_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qa">
+              <PropertyRef Name="Qa_id" />
+            </Principal>
+            <Dependent Role="qa_rating">
+              <PropertyRef Name="Qa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qa_comment__U_id__21B6055D">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="qa_comment" Type="Self.qa_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="qa_comment">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_ratin__U_id__09DE7BCC">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="user_rating" Type="Self.user_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="user_rating">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_commen__U_id__276EDEB3">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="vid_comment" Type="Self.vid_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="vid_comment">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__video__U_id__1367E606">
+          <End Role="user_t" Type="Self.user_t" Multiplicity="1" />
+          <End Role="video" Type="Self.video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_t">
+              <PropertyRef Name="U_id" />
+            </Principal>
+            <Dependent Role="video">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_comme__Vid_i__286302EC">
+          <End Role="video" Type="Self.video" Multiplicity="1" />
+          <End Role="vid_comment" Type="Self.vid_comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="video">
+              <PropertyRef Name="Vid_id" />
+            </Principal>
+            <Dependent Role="vid_comment">
+              <PropertyRef Name="Vid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vid_ratin__Vid_i__1CF15040">
+          <End Role="video" Type="Self.video" Multiplicity="1" />
+          <End Role="vid_rating" Type="Self.vid_rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="video">
+              <PropertyRef Name="Vid_id" />
+            </Principal>
+            <Dependent Role="vid_rating">
+              <PropertyRef Name="Vid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="paathshalaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="messages" EntityType="Self.message" />
+          <EntitySet Name="qas" EntityType="Self.qa" />
+          <EntitySet Name="qa_comment" EntityType="Self.qa_comment" />
+          <EntitySet Name="qa_rating" EntityType="Self.qa_rating" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="user_rating" EntityType="Self.user_rating" />
+          <EntitySet Name="user_t" EntityType="Self.user_t" />
+          <EntitySet Name="vid_comment" EntityType="Self.vid_comment" />
+          <EntitySet Name="vid_rating" EntityType="Self.vid_rating" />
+          <EntitySet Name="videos" EntityType="Self.video" />
+          <AssociationSet Name="FK__message__S_id__0519C6AF" Association="Self.FK__message__S_id__0519C6AF">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="message" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa__U_id__0EA330E9" Association="Self.FK__qa__U_id__0EA330E9">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="qa" EntitySet="qas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_commen__Qa_id__22AA2996" Association="Self.FK__qa_commen__Qa_id__22AA2996">
+            <End Role="qa" EntitySet="qas" />
+            <End Role="qa_comment" EntitySet="qa_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_rating__Qa_id__182C9B23" Association="Self.FK__qa_rating__Qa_id__182C9B23">
+            <End Role="qa" EntitySet="qas" />
+            <End Role="qa_rating" EntitySet="qa_rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qa_comment__U_id__21B6055D" Association="Self.FK__qa_comment__U_id__21B6055D">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="qa_comment" EntitySet="qa_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_ratin__U_id__09DE7BCC" Association="Self.FK__user_ratin__U_id__09DE7BCC">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="user_rating" EntitySet="user_rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_commen__U_id__276EDEB3" Association="Self.FK__vid_commen__U_id__276EDEB3">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="vid_comment" EntitySet="vid_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__video__U_id__1367E606" Association="Self.FK__video__U_id__1367E606">
+            <End Role="user_t" EntitySet="user_t" />
+            <End Role="video" EntitySet="videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_comme__Vid_i__286302EC" Association="Self.FK__vid_comme__Vid_i__286302EC">
+            <End Role="video" EntitySet="videos" />
+            <End Role="vid_comment" EntitySet="vid_comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vid_ratin__Vid_i__1CF15040" Association="Self.FK__vid_ratin__Vid_i__1CF15040">
+            <End Role="video" EntitySet="videos" />
+            <End Role="vid_rating" EntitySet="vid_rating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="paathshalaModelStoreContainer" CdmEntityContainer="paathshalaEntities">
+          <EntitySetMapping Name="messages">
+            <EntityTypeMapping TypeName="paathshalaModel.message">
+              <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="M_id" ColumnName="M_id" />
+                <ScalarProperty Name="S_id" ColumnName="S_id" />
+                <ScalarProperty Name="Destination_id" ColumnName="Destination_id" />
+                <ScalarProperty Name="message1" ColumnName="message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qas">
+            <EntityTypeMapping TypeName="paathshalaModel.qa">
+              <MappingFragment StoreEntitySet="qa">
+                <ScalarProperty Name="Qa_id" ColumnName="Qa_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Qa_title" ColumnName="Qa_title" />
+                <ScalarProperty Name="Qa_body" ColumnName="Qa_body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qa_comment">
+            <EntityTypeMapping TypeName="paathshalaModel.qa_comment">
+              <MappingFragment StoreEntitySet="qa_comment">
+                <ScalarProperty Name="C_id" ColumnName="C_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Qa_id" ColumnName="Qa_id" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qa_rating">
+            <EntityTypeMapping TypeName="paathshalaModel.qa_rating">
+              <MappingFragment StoreEntitySet="qa_rating">
+                <ScalarProperty Name="Qa_rating_id" ColumnName="Qa_rating_id" />
+                <ScalarProperty Name="Qa_id" ColumnName="Qa_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Qa_rating1" ColumnName="Qa_rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="paathshalaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_rating">
+            <EntityTypeMapping TypeName="paathshalaModel.user_rating">
+              <MappingFragment StoreEntitySet="user_rating">
+                <ScalarProperty Name="User_rating_id" ColumnName="User_rating_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="User_rating1" ColumnName="User_rating" />
+                <ScalarProperty Name="User_tag" ColumnName="User_tag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_t">
+            <EntityTypeMapping TypeName="paathshalaModel.user_t">
+              <MappingFragment StoreEntitySet="user_t">
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Admin_check" ColumnName="Admin_check" />
+                <ScalarProperty Name="ban" ColumnName="ban" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vid_comment">
+            <EntityTypeMapping TypeName="paathshalaModel.vid_comment">
+              <MappingFragment StoreEntitySet="vid_comment">
+                <ScalarProperty Name="C_id" ColumnName="C_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Vid_id" ColumnName="Vid_id" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vid_rating">
+            <EntityTypeMapping TypeName="paathshalaModel.vid_rating">
+              <MappingFragment StoreEntitySet="vid_rating">
+                <ScalarProperty Name="Vid_rating_id" ColumnName="Vid_rating_id" />
+                <ScalarProperty Name="Vid_id" ColumnName="Vid_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Vid_rating1" ColumnName="Vid_rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="videos">
+            <EntityTypeMapping TypeName="paathshalaModel.video">
+              <MappingFragment StoreEntitySet="video">
+                <ScalarProperty Name="Vid_id" ColumnName="Vid_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Vid_title" ColumnName="Vid_title" />
+                <ScalarProperty Name="Vid_body" ColumnName="Vid_body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

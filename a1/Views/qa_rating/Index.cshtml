@@ -1,0 +1,45 @@
+﻿@model IEnumerable<a1.Models.qa_rating>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.U_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qa_rating1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qa.Qa_title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.U_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qa_rating1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qa.Qa_title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Qa_rating_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Qa_rating_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Qa_rating_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model a1.Models.qa_rating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>qa_rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.U_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.U_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qa_rating1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qa_rating1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qa.Qa_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qa.Qa_title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Qa_rating_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

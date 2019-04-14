@@ -1,0 +1,42 @@
+﻿@model a1.Models.video
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>video</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vid_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vid_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vid_body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vid_body)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_t.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_t.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Vid_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
